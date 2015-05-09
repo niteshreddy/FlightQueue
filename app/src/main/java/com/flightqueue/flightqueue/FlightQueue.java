@@ -14,12 +14,13 @@ public class FlightQueue {
     private Comparator<AirPlane> flightComparator;
     private PriorityQueue<AirPlane> airPlaneQueue;
 
-    public void FlightQueue(){
+    public FlightQueue(){
         flightComparator = new AirPlaneComparator();
-        airPlaneQueue = new PriorityQueue<AirPlane>(100,flightComparator);
+        airPlaneQueue = new PriorityQueue<AirPlane>(10,flightComparator);
     }
 
     public void enQueue(AirPlane ap){
+
         airPlaneQueue.add(ap);
     }
 
@@ -27,6 +28,10 @@ public class FlightQueue {
 
         return airPlaneQueue.poll();
 
+    }
+
+    public void clearQueue(){
+        airPlaneQueue.clear();
     }
 
 
