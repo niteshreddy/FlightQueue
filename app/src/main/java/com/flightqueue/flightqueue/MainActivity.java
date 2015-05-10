@@ -122,10 +122,23 @@ public class MainActivity extends ActionBarActivity {
 
             //Dequeue the head.
             AirPlane ap = fq.deQueue();
+            String message;
 
             if(ap != null){
                 //Notify that the plane has been dequeued.
-                Toast.makeText(MainActivity.this,ap.getName() + " is Dequeued!",
+
+
+                message = ap.getName();
+
+                if(ap instanceof PassengerPlane){
+                    message = message + " Passenger Plane";
+                }else{
+                    message = message + " Cargo Plane";
+                }
+
+                message = message + " " +ap.getSize() + " is Dequeued!" ;
+
+                Toast.makeText(MainActivity.this,message,
                         Toast.LENGTH_LONG).show();
             }else{
                 //if no plane in queue.
@@ -138,7 +151,7 @@ public class MainActivity extends ActionBarActivity {
 
     /*
       This class listens to the "re-initialize" button and
-      clears the queue. 
+      clears the queue.
      */
     private class ClearQueue implements  View.OnClickListener{
 
@@ -159,7 +172,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         //Initialize our flight quque.
-        fq = new FlightQueue();
+        fq = FlightQueue.getInstance();
         Toast.makeText(MainActivity.this,"Queue Initialized", Toast.LENGTH_LONG).show();
 
         //Setup Listeners for buttons.

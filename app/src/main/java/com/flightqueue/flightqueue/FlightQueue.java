@@ -11,6 +11,8 @@ import java.util.PriorityQueue;
  */
 public class FlightQueue {
 
+    private static FlightQueue sInstance = null;
+
     /**
      *Custom comparator to queue the planes.
      */
@@ -24,9 +26,21 @@ public class FlightQueue {
     /**
      * Initialize the comparator and quque.
      */
-    public FlightQueue(){
+    private FlightQueue(){
         flightComparator = new AirPlaneComparator();
         airPlaneQueue = new PriorityQueue<AirPlane>(10,flightComparator);
+    }
+
+    /**
+     *
+     * @return singleton object of FlightQueue
+     */
+    public static FlightQueue getInstance(){
+        if(sInstance == null){
+            sInstance = new FlightQueue();
+        }
+
+        return sInstance;
     }
 
     /**

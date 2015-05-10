@@ -20,7 +20,8 @@ public class FlightQueueTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        fq = new FlightQueue();
+        fq = FlightQueue.getInstance();
+        fq.clearQueue();
         // do initialization here, run on every test method
 
     }
