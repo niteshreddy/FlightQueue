@@ -10,10 +10,11 @@
         android:layout_height="wrap_content"
         android:text="@string/enqueue"
         android:id="@+id/enqueue"
-        android:layout_centerVertical="true"
+        android:singleLine="false"
+        android:layout_above="@+id/dequeue"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:singleLine="false" />
+        android:layout_marginBottom="49dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -40,7 +41,8 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/planenametext"
         android:layout_alignRight="@+id/enqueue"
-        android:layout_alignEnd="@+id/enqueue" />
+        android:layout_alignEnd="@+id/enqueue"
+        android:hint="Enter Name" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,7 +63,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignBottom="@+id/planesizetext"
-        android:id="@+id/radioGroup">
+        android:id="@+id/plane_type_radio_group">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -91,23 +93,34 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/radioGroup"
-        android:layout_alignLeft="@+id/radioGroup"
-        android:layout_alignStart="@+id/radioGroup"
-        android:layout_above="@+id/enqueue">
+        android:layout_below="@+id/plane_type_radio_group"
+        android:layout_alignLeft="@+id/plane_type_radio_group"
+        android:layout_alignStart="@+id/plane_type_radio_group"
+        android:layout_above="@+id/enqueue"
+        android:id="@+id/plane_size_radio_group">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/plane_large_radio"
-            android:id="@+id/radioButton"
+            android:id="@+id/planelargeradio"
             android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/plane_small_radio"
-            android:id="@+id/radioButton2" />
+            android:id="@+id/planesmallradio"
+            android:singleLine="true" />
     </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/re_initialize_queue"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/dequeue"
+        android:layout_alignStart="@+id/dequeue"
+        android:text="@string/queue_re_initialize" />
 
 </RelativeLayout>

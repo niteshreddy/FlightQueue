@@ -11,6 +11,8 @@
     <string name="plane_size_text">Plane Size:</string>
     <string name="plane_large_radio">Large</string>
     <string name="plane_small_radio">Small</string>
+
+    <string name="queue_re_initialize">Re-Initialize Queue</string>
     <string name="enqueue">enQueue Plane</string>
     <string name="dequeue">deQueue Plane</string>
 
