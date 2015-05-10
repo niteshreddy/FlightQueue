@@ -3,4 +3,15 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="plane_name_text">Plane Name:</string>
+    <string name="plane_type_text">Plane Type:</string>
+    <string name="passenger_plane_radio">Passenger Plane</string>
+    <string name="cargo_plane_radio">Cargo Plane</string>
+    <string name="plane_size_text">Plane Size:</string>
+    <string name="plane_large_radio">Large</string>
+    <string name="plane_small_radio">Small</string>
+    <string name="enqueue">enQueue Plane</string>
+    <string name="dequeue">deQueue Plane</string>
+
 </resources>
