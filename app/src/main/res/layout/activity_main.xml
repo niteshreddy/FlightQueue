@@ -11,19 +11,24 @@
         android:text="@string/enqueue"
         android:id="@+id/enqueue"
         android:singleLine="false"
+        android:layout_marginBottom="53dp"
         android:layout_above="@+id/dequeue"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="49dp" />
+        android:background="@drawable/button_selector_enqueue"
+        android:elegantTextHeight="false"
+        android:typeface="monospace" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dequeue"
         android:id="@+id/dequeue"
+        android:typeface="monospace"
+        android:background="@drawable/button_selector_dequeue"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="99dp" />
+        android:layout_toLeftOf="@+id/enqueue"
+        android:layout_toStartOf="@+id/enqueue" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -113,14 +118,5 @@
             android:id="@+id/planesmallradio"
             android:singleLine="true" />
     </RadioGroup>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/re_initialize_queue"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/dequeue"
-        android:layout_alignStart="@+id/dequeue"
-        android:text="@string/queue_re_initialize" />
 
 </RelativeLayout>

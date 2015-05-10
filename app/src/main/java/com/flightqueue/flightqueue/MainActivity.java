@@ -20,7 +20,7 @@ public class MainActivity extends ActionBarActivity {
 
     private Button enqueue;
     private Button dequeue;
-    private Button reinitialize;
+    private View  reinitialize;
 
     private RadioButton passenger_radio;
     private RadioButton cargo_radio;
@@ -44,11 +44,6 @@ public class MainActivity extends ActionBarActivity {
         //Setup listener for dequeue button.
         dequeue = (Button) findViewById(R.id.dequeue);
         dequeue.setOnClickListener(new DeQueuePlane());
-
-        //Setup listener for re-initializing the plane
-        reinitialize = (Button) findViewById(R.id.re_initialize_queue);
-        reinitialize.setOnClickListener(new ClearQueue());
-
 
     }
     /*
@@ -149,21 +144,14 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    /*
-      This class listens to the "re-initialize" button and
-      clears the queue.
-     */
-    private class ClearQueue implements  View.OnClickListener{
+    private void clearQueue() {
 
-        @Override
-        public void onClick(View v) {
-            //Clear the queu and send a notification.
-            fq.clearQueue();
+        //Clear the queue and send a notification.
+        fq.clearQueue();
 
-            Toast.makeText(MainActivity.this,"Queue Re-initialized!",
-                    Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this,"Queue Re-initialized!",
+                Toast.LENGTH_LONG).show();
 
-        }
     }
 
     @Override
@@ -194,9 +182,8 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if(id == R.id.re_initialize_queue){
+            clearQueue();
         }
 
         return super.onOptionsItemSelected(item);
