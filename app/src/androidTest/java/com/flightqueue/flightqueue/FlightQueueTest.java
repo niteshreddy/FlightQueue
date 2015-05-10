@@ -69,7 +69,7 @@ public class FlightQueueTest extends TestCase {
     }
 
     /**
-     * Two planes of the same type are entered
+     * Two planes of the same type, but different sizes are entered
      */
     public void testlargeSmall(){
 
@@ -89,11 +89,12 @@ public class FlightQueueTest extends TestCase {
         fq.enQueue(new PassengerPlane("plane2",small));
 
         assertEquals("plane2", fq.deQueue().getName());
+        assertEquals("plane1", fq.deQueue().getName());
 
     }
 
     /**
-     * Two planes of the different types are entered.
+     * Random planes are entered.
      *
      */
     public void testMultiplePlanes() {

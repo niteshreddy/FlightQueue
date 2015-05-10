@@ -22,6 +22,10 @@ public class AirPlaneComparator implements Comparator<AirPlane> {
     @Override
     public int compare(AirPlane ap1, AirPlane ap2){
 
+         /*
+            If both are of different type then
+             passenger plane will take higher priority.
+         */
         if(ap1 instanceof PassengerPlane && ap2 instanceof CargoPlane){
             return -1;
         }
@@ -29,6 +33,9 @@ public class AirPlaneComparator implements Comparator<AirPlane> {
             return 1;
         }
 
+        /*
+            If they are of the same type, then the larger size will take priority.
+         */
         if((ap1 instanceof  PassengerPlane && ap2 instanceof  PassengerPlane) ||
                 (ap1 instanceof  CargoPlane && ap2 instanceof  CargoPlane) ){
 
@@ -42,6 +49,11 @@ public class AirPlaneComparator implements Comparator<AirPlane> {
             }
         }
 
+
+        /*
+            If everything about the planes is the same,
+            then the one that entered the queue earlier will take priority.
+         */
         if(ap1 instanceof  PassengerPlane && ap2 instanceof PassengerPlane && ap1.getSize().equals(ap2.getSize())){
 
             if(ap1.getDate().before(ap2.getDate())){
@@ -62,6 +74,9 @@ public class AirPlaneComparator implements Comparator<AirPlane> {
 
         }
 
+        /*
+            if none means both the planes are equivalent.
+         */
         return 0;
 
     }

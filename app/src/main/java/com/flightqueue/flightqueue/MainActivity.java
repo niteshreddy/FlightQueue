@@ -15,10 +15,12 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
+    //The queue that holds all the flights.
     private FlightQueue fq;
 
     private Button enqueue;
     private Button dequeue;
+    private Button reinitialize;
 
     private RadioButton passenger_radio;
     private RadioButton cargo_radio;
@@ -35,29 +37,41 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void setUpOnClickListeners() {
+        //setup Listener for Enqueue button.
         enqueue = (Button) findViewById(R.id.enqueue);
         enqueue.setOnClickListener(new EnQueuePlane());
 
-    }
+        //Setup listener for dequeue button.
+        dequeue = (Button) findViewById(R.id.dequeue);
+        dequeue.setOnClickListener(new DeQueuePlane());
 
+        //Setup listener for re-initializing the plane
+        reinitialize = (Button) findViewById(R.id.re_initialize_queue);
+        reinitialize.setOnClickListener(new ClearQueue());
+
+
+    }
+    /*
+     This class lisentes to the "Enqueue Plane" button
+     and processes the form and enteres the plane into the queue.
+     */
     private class EnQueuePlane implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {
 
-            //Is it a passenger plane?
-            boolean passenger_plane;
-            //Large or small?
-            boolean large_plane;
-
+            //Plane name edit text.
             plane_name = (EditText) findViewById(R.id.plannenameedittext);
 
+            //Passenger or cargo radio buttons.
             passenger_radio = (RadioButton) findViewById(R.id.passengerplaneradio);
             cargo_radio = (RadioButton) findViewById(R.id.cargoplaneradio);
 
+            //large or small radio buttons
             large_plane_radio = (RadioButton) findViewById(R.id.planelargeradio);
             small_plane_radio = (RadioButton) findViewById(R.id.planesmallradio);
 
+            //The name field cannot be empty.
             if(plane_name.getText().toString().trim().equals("")){
 
                 Toast.makeText(MainActivity.this,"A plane needs a Name!", Toast.LENGTH_LONG).show();
@@ -66,28 +80,25 @@ public class MainActivity extends ActionBarActivity {
 
             }
 
-            if(passenger_radio.isChecked()){
-                passenger_plane = true;
-            }else{
-                passenger_plane = false;
-            }
+            //Decide which plane the user is choosing.
+            if(passenger_radio.isChecked() && large_plane_radio.isChecked()){
 
-            if(large_plane_radio.isChecked()){
-                large_plane =  true;
-            }else{
-                large_plane = false;
-            }
-
-            if(passenger_plane == true && large_plane == true){
                 fq.enQueue(new PassengerPlane(plane_name.getText().toString(),large));
-            }else if(passenger_plane = true && large_plane == false){
+
+            }else if(passenger_radio.isChecked() && small_plane_radio.isChecked()){
+
                 fq.enQueue(new PassengerPlane(plane_name.getText().toString(),small));
-            }else if(passenger_plane = false && large_plane == true){
+
+            }else if(cargo_radio.isChecked() && large_plane_radio.isChecked()){
+
                 fq.enQueue(new CargoPlane(plane_name.getText().toString(),large));
-            }else if(passenger_plane == false && large_plane == false){
+
+            }else if(cargo_radio.isChecked() && small_plane_radio.isChecked()){
+
                 fq.enQueue(new CargoPlane(plane_name.getText().toString(),small));
             }
 
+            //Notify that the plane is in Queue.
             Toast.makeText(MainActivity.this,plane_name.getText().toString() + " in Queue!",
                     Toast.LENGTH_LONG).show();
 
@@ -100,13 +111,58 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    /*
+     *This class listenes to the "DeQueue" button and Dequeues an AirPlane.
+     *
+     */
+    private class DeQueuePlane implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+
+            //Dequeue the head.
+            AirPlane ap = fq.deQueue();
+
+            if(ap != null){
+                //Notify that the plane has been dequeued.
+                Toast.makeText(MainActivity.this,ap.getName() + " is Dequeued!",
+                        Toast.LENGTH_LONG).show();
+            }else{
+                //if no plane in queue.
+                Toast.makeText(MainActivity.this,"No plane in Queue!",
+                        Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+
+    /*
+      This class listens to the "re-initialize" button and
+      clears the queue. 
+     */
+    private class ClearQueue implements  View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            //Clear the queu and send a notification.
+            fq.clearQueue();
+
+            Toast.makeText(MainActivity.this,"Queue Re-initialized!",
+                    Toast.LENGTH_LONG).show();
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Initialize our flight quque.
         fq = new FlightQueue();
         Toast.makeText(MainActivity.this,"Queue Initialized", Toast.LENGTH_LONG).show();
+
+        //Setup Listeners for buttons.
         setUpOnClickListeners();
     }
 
@@ -134,7 +190,4 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public int returnTwo(){
-        return 2;
-    }
 }
