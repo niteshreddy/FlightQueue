@@ -11,5 +11,7 @@
     <color name="bright_red">#ffff3400</color>
     <color name="button_red">#ffcd001e</color>
 
+    <color name="background_color">#587498</color>
+
 
 </resources>
